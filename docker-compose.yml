@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  database:
+    container_name: mysql-tech-challenge
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3340:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: techchallenge
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  mysql_data:
