@@ -1,7 +1,10 @@
 package br.com.postech.techchallenge.adapters.out.database.entity;
 
+import br.com.postech.techchallenge.adapters.out.database.entity.enums.PaymentStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,5 +25,6 @@ public class PaymentEntity {
   private OrderEntity order;
 
   @Column(name = "status")
-  private String status;
+  @Enumerated(EnumType.STRING)
+  private PaymentStatus status;
 }
