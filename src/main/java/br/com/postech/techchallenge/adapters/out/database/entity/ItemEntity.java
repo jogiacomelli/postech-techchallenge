@@ -1,7 +1,10 @@
 package br.com.postech.techchallenge.adapters.out.database.entity;
 
+import br.com.postech.techchallenge.adapters.out.database.entity.enums.ItemType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +31,8 @@ public class ItemEntity {
   private BigDecimal price;
 
   @Column(name = "type")
-  private String type;
+  @Enumerated(EnumType.STRING)
+  private ItemType type;
 
   @OneToMany(mappedBy = "item")
   private List<OrderItemEntity> orderItems;
