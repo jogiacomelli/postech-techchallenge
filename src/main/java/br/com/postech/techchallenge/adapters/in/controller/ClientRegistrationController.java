@@ -1,13 +1,17 @@
 package br.com.postech.techchallenge.adapters.in.controller;
 
 import br.com.postech.techchallenge.adapters.in.controller.request.ClientRegistrationRequest;
+import br.com.postech.techchallenge.adapters.in.controller.response.ClientResponse;
 import br.com.postech.techchallenge.application.core.domain.Client;
 import br.com.postech.techchallenge.application.ports.in.RegisterClientInputPort;
+import br.com.postech.techchallenge.application.ports.in.SearchClientByCpfInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientRegistrationController {
 
   private final RegisterClientInputPort registerClientInputPort;
+  private final SearchClientByCpfInputPort searchClientByCpfInputPort;
   private final ModelMapper modelMapper;
 
   @PostMapping("/client")
@@ -29,6 +34,14 @@ public class ClientRegistrationController {
     log.info("Client registration request: {} received", clientRegistrationRequest);
     var client = modelMapper.map(clientRegistrationRequest, Client.class);
     registerClientInputPort.execute(client);
+  }
+
+  @GetMapping("/client/{cpf}")
+  @ResponseStatus(HttpStatus.OK)
+  public ClientResponse clientRegistration(@PathVariable final String cpf) {
+    log.info("Client search request received for cpf {} ", cpf);
+    var client = searchClientByCpfInputPort.execute(cpf);
+    return modelMapper.map(client, ClientResponse.class);
   }
 
 }
