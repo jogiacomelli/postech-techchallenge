@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/techchallenge")
+@RequestMapping("/techchallenge/clients")
 public class ClientRegistrationController {
 
   private final RegisterClientInputPort registerClientInputPort;
   private final SearchClientByCpfInputPort searchClientByCpfInputPort;
   private final ModelMapper modelMapper;
 
-  @PostMapping("/client")
+  @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public void clientRegistration(@Valid @RequestBody final ClientRegistrationRequest clientRegistrationRequest) {
     log.info("Client registration request: {} received", clientRegistrationRequest);
@@ -36,7 +36,7 @@ public class ClientRegistrationController {
     registerClientInputPort.execute(client);
   }
 
-  @GetMapping("/client/{cpf}")
+  @GetMapping("/{cpf}")
   @ResponseStatus(HttpStatus.OK)
   public ClientResponse clientRegistration(@PathVariable final String cpf) {
     log.info("Client search request received for cpf {} ", cpf);

@@ -9,9 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+import lombok.Data;
 
 @Entity
 @Table(name = "order_item")
+@Data
 public class OrderItemEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

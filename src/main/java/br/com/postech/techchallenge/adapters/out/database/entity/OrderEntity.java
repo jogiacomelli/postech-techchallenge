@@ -15,9 +15,11 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Entity
 @Table(name = "client_order")
+@Data
 public class OrderEntity {
 
   @Id
