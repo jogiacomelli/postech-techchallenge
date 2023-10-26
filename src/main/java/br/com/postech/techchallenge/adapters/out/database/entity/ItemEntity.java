@@ -8,18 +8,18 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import java.util.List;
+import lombok.Data;
 
 @Entity
 @Table(name = "item")
+@Data
 public class ItemEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private int id;
+  private Integer id;
 
   @Column(name = "name")
   private String name;
@@ -34,6 +34,4 @@ public class ItemEntity {
   @Enumerated(EnumType.STRING)
   private ItemType type;
 
-  @OneToMany(mappedBy = "item")
-  private List<OrderItemEntity> orderItems;
 }
