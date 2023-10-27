@@ -1,4 +1,4 @@
-package br.com.postech.techchallenge.adapters.out.database.entity.enums;
+package br.com.postech.techchallenge.application.core.domain.enums;
 
 public enum OrderStatus {
   WAITING_PAYMENT,

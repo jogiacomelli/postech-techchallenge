@@ -30,7 +30,4 @@ public class ClientEntity {
 
   @Column(name = "registration_date", insertable = false, updatable = false)
   private LocalDateTime registrationDate;
-
-  @OneToMany(mappedBy = "client")
-  private List<OrderEntity> orders;
 }

@@ -1,6 +1,6 @@
 package br.com.postech.techchallenge.adapters.out.database.entity;
 
-import br.com.postech.techchallenge.adapters.out.database.entity.enums.PaymentStatus;
+import br.com.postech.techchallenge.application.core.domain.enums.PaymentStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
