@@ -1,9 +1,9 @@
 package br.com.postech.techchallenge.adapters.out;
 
-import br.com.postech.techchallenge.adapters.exceptions.NotFoundException;
 import br.com.postech.techchallenge.adapters.out.database.repository.ClientRepository;
 import br.com.postech.techchallenge.application.core.domain.Client;
 import br.com.postech.techchallenge.application.ports.out.SearchClientByCpfOutputPort;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -16,9 +16,8 @@ public class SearchClientByCpfAdapter implements SearchClientByCpfOutputPort {
   private final ModelMapper modelMapper;
 
   @Override
-  public Client execute(String cpf) {
+  public Optional<Client> execute(String cpf) {
     return clientRepository.findById(cpf)
-        .map(clientEntity -> modelMapper.map(clientEntity, Client.class))
-        .orElseThrow(() -> new NotFoundException(String.format("Client with cpf %s not found", cpf)));
+        .map(clientEntity -> modelMapper.map(clientEntity, Client.class));
   }
 }

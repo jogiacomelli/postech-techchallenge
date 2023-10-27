@@ -1,5 +1,6 @@
-package br.com.postech.techchallenge.adapters.exceptions;
+package br.com.postech.techchallenge.application.core.exceptions;
 
+import br.com.postech.techchallenge.adapters.exceptions.ApiException;
 import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends ApiException {

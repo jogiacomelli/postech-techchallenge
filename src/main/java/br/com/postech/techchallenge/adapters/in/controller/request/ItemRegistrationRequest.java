@@ -1,6 +1,6 @@
 package br.com.postech.techchallenge.adapters.in.controller.request;
 
-import br.com.postech.techchallenge.adapters.out.database.entity.enums.ItemType;
+import br.com.postech.techchallenge.application.core.domain.enums.ItemType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;

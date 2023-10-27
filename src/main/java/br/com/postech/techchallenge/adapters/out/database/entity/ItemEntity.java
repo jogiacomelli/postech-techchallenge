@@ -1,6 +1,6 @@
 package br.com.postech.techchallenge.adapters.out.database.entity;
 
-import br.com.postech.techchallenge.adapters.out.database.entity.enums.ItemType;
+import br.com.postech.techchallenge.application.core.domain.enums.ItemType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

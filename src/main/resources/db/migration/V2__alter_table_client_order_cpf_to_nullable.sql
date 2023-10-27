@@ -1,0 +1,1 @@
+ALTER TABLE client_order MODIFY CPF VARCHAR(11) null;
