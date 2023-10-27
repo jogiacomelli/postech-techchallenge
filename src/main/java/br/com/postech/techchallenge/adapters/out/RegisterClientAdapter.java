@@ -1,6 +1,5 @@
 package br.com.postech.techchallenge.adapters.out;
 
-import br.com.postech.techchallenge.application.core.exceptions.ConflictException;
 import br.com.postech.techchallenge.adapters.out.database.entity.ClientEntity;
 import br.com.postech.techchallenge.adapters.out.database.repository.ClientRepository;
 import br.com.postech.techchallenge.application.core.domain.Client;
