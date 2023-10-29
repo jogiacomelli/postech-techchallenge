@@ -1,7 +1,9 @@
 package br.com.postech.techchallenge.adapters.in.controller;
 
+import br.com.postech.techchallenge.adapters.in.controller.request.ItemEditionRequest;
 import br.com.postech.techchallenge.adapters.in.controller.request.ItemRegistrationRequest;
 import br.com.postech.techchallenge.application.core.domain.Item;
+import br.com.postech.techchallenge.application.ports.in.EditItemInputPort;
 import br.com.postech.techchallenge.application.ports.in.RegisterItemInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/techchallenge/items")
-public class ItemRegistrationController {
+public class ItemController {
 
   private final RegisterItemInputPort registerItemInputPort;
+  private final EditItemInputPort editItemInputPort;
   private final ModelMapper modelMapper;
 
   @PostMapping
@@ -27,8 +30,16 @@ public class ItemRegistrationController {
     registerItemInputPort.execute(item);
   }
 
-  @GetMapping
-  public void getItem()
+  @PatchMapping("/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public void itemEdition (@Valid @RequestBody final ItemEditionRequest itemEditionRequest,
+                           @PathVariable final Integer id) {
+    log.info("Item edition request: {} received", itemEditionRequest);
+    var item = modelMapper.map(itemEditionRequest, Item.class);
+    editItemInputPort.execute(id, item);
+  }
 
 
+
+  // get item by type
 }

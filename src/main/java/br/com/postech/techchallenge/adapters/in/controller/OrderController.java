@@ -30,4 +30,8 @@ public class OrderController {
     var order = modelMapper.map(orderCreationRequest, Order.class);
     createOrderInputPort.execute(order);
   }
+
+  // change status
+
+  //get order by status
 }
