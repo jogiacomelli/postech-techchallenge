@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/techchallenge/clients")
-public class ClientRegistrationController {
+public class ClientController {
 
   private final RegisterClientInputPort registerClientInputPort;
   private final SearchClientByCpfInputPort searchClientByCpfInputPort;
@@ -38,7 +38,7 @@ public class ClientRegistrationController {
 
   @GetMapping("/{cpf}")
   @ResponseStatus(HttpStatus.OK)
-  public ClientResponse clientRegistration(@PathVariable final String cpf) {
+  public ClientResponse getClientByCPF(@PathVariable final String cpf) {
     log.info("Client search request received for cpf {} ", cpf);
     var client = searchClientByCpfInputPort.execute(cpf);
     return modelMapper.map(client, ClientResponse.class);

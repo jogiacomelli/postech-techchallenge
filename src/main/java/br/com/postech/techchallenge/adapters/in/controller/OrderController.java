@@ -25,7 +25,7 @@ public class OrderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public void clientRegistration(@Valid @RequestBody final OrderCreationRequest orderCreationRequest) {
+  public void orderCreation(@Valid @RequestBody final OrderCreationRequest orderCreationRequest) {
     log.info("Order creation request: {} received", orderCreationRequest);
     var order = modelMapper.map(orderCreationRequest, Order.class);
     createOrderInputPort.execute(order);
