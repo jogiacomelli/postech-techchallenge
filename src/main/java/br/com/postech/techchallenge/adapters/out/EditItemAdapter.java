@@ -6,6 +6,7 @@ import br.com.postech.techchallenge.application.core.domain.Item;
 import br.com.postech.techchallenge.application.ports.out.EditItemOutputPort;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -14,13 +15,14 @@ import org.springframework.stereotype.Component;
 public class EditItemAdapter implements EditItemOutputPort {
 
     private final ItemRepository itemRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     @Transactional
-    public void execute(Integer id, Item item) {
+    public Item execute(Integer id, Item item) {
         var itemEntity = itemRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         copyNonNullProperties(item, itemEntity);
-        itemRepository.save(itemEntity);
+        return modelMapper.map(itemRepository.save(itemEntity), Item.class);
     }
 
     private void copyNonNullProperties(Item item, ItemEntity itemEntity) {

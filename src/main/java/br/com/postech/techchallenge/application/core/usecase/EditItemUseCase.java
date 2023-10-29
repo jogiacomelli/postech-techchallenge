@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 public class EditItemUseCase implements EditItemInputPort {
     private final EditItemOutputPort editItemOutputPort;
     @Override
-    public void execute(Integer id, Item item) {
+    public Item execute(Integer id, Item item) {
         try {
-            editItemOutputPort.execute(id, item);
+            return editItemOutputPort.execute(id, item);
         } catch (IllegalArgumentException e) {
             throw new NotFoundException("Item não encontrado!");
         }
