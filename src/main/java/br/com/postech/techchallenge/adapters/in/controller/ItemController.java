@@ -5,6 +5,7 @@ import br.com.postech.techchallenge.adapters.in.controller.request.ItemRegistrat
 import br.com.postech.techchallenge.adapters.in.controller.response.ItemResponse;
 import br.com.postech.techchallenge.application.core.domain.Item;
 import br.com.postech.techchallenge.application.core.domain.enums.ItemType;
+import br.com.postech.techchallenge.application.ports.in.DeleteItemInputPort;
 import br.com.postech.techchallenge.application.ports.in.EditItemInputPort;
 import br.com.postech.techchallenge.application.ports.in.RegisterItemInputPort;
 import br.com.postech.techchallenge.application.ports.in.SearchItemInputPort;
@@ -28,6 +29,7 @@ public class ItemController {
   private final RegisterItemInputPort registerItemInputPort;
   private final EditItemInputPort editItemInputPort;
   private final SearchItemInputPort searchItemInputPort;
+  private final DeleteItemInputPort deleteItemInputPort;
   private final ModelMapper modelMapper;
 
   @PostMapping
@@ -56,5 +58,12 @@ public class ItemController {
                     .map(item -> modelMapper.map(item, ItemResponse.class)).
                     toList()
             );
+  }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public void itemDelete(@NotNull @PathVariable final Integer id) {
+    log.info("Item delete request: {} received", id);
+    deleteItemInputPort.execute(id);
   }
 }
