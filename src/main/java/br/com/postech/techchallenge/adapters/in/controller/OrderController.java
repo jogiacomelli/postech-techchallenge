@@ -1,18 +1,19 @@
 package br.com.postech.techchallenge.adapters.in.controller;
 
 import br.com.postech.techchallenge.adapters.in.controller.request.OrderCreationRequest;
+import br.com.postech.techchallenge.adapters.in.controller.response.OrderResponse;
 import br.com.postech.techchallenge.application.core.domain.Order;
 import br.com.postech.techchallenge.application.ports.in.CreateOrderInputPort;
+import br.com.postech.techchallenge.application.ports.in.ListOrderInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
   private final CreateOrderInputPort createOrderInputPort;
+  private final ListOrderInputPort listOrderInputPort;
   private final ModelMapper modelMapper;
 
   @PostMapping
@@ -31,7 +33,16 @@ public class OrderController {
     createOrderInputPort.execute(order);
   }
 
-  // change status
+  @GetMapping
+  public ResponseEntity<List<OrderResponse>> listAllOrders() {
+    log.info("Get all orders request received");
+    var orders = listOrderInputPort.execute();
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(orders.stream()
+                    .map(order -> modelMapper.map(order, OrderResponse.class)).
+                            toList()
+            );
+  }
 
-  //get order by status
+
 }
