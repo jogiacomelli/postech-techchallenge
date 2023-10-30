@@ -4,8 +4,10 @@ import br.com.postech.techchallenge.adapters.in.controller.request.ItemEditionRe
 import br.com.postech.techchallenge.adapters.in.controller.request.ItemRegistrationRequest;
 import br.com.postech.techchallenge.adapters.in.controller.response.ItemResponse;
 import br.com.postech.techchallenge.application.core.domain.Item;
+import br.com.postech.techchallenge.application.core.domain.enums.ItemType;
 import br.com.postech.techchallenge.application.ports.in.EditItemInputPort;
 import br.com.postech.techchallenge.application.ports.in.RegisterItemInputPort;
+import br.com.postech.techchallenge.application.ports.in.SearchItemInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,6 +27,7 @@ public class ItemController {
 
   private final RegisterItemInputPort registerItemInputPort;
   private final EditItemInputPort editItemInputPort;
+  private final SearchItemInputPort searchItemInputPort;
   private final ModelMapper modelMapper;
 
   @PostMapping
@@ -34,14 +40,21 @@ public class ItemController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<ItemResponse> itemEdition (@Valid @RequestBody final ItemEditionRequest itemEditionRequest,
-                                     @PathVariable final Integer id) {
+                                                   @PathVariable final Integer id) {
     log.info("Item edition request: {} received", itemEditionRequest);
     var item = modelMapper.map(itemEditionRequest, Item.class);
     var savedItem = editItemInputPort.execute(id, item);
     return ResponseEntity.status(HttpStatus.OK).body(modelMapper.map(savedItem, ItemResponse.class));
   }
 
-
-
-  // get item by type
+  @GetMapping
+  public ResponseEntity<List<ItemResponse>> itemSearch(@NotNull @RequestParam final String type) {
+    log.info("Item search request: {} received", type);
+    var items = searchItemInputPort.execute(type);
+    return ResponseEntity.status(HttpStatus.OK)
+            .body(items.stream()
+                    .map(item -> modelMapper.map(item, ItemResponse.class)).
+                    toList()
+            );
+  }
 }
