@@ -1,7 +1,7 @@
 # postech-techchallenge
 
 Para executar aplicação via docker-compose:
-- Baixar arquivo docker compose [[https://drive.google.com/drive/folders/1yqoHpguwbWh8TqlQM49Hq9FCp5ew4iJH](https://drive.google.com/file/d/1zXiK0iTVQ2k8hMuRldHXo352PzTKN43o/view?usp=drive_link)](https://drive.google.com/file/d/1zXiK0iTVQ2k8hMuRldHXo352PzTKN43o/view?usp=drive_link)
+- Baixar arquivo docker compose: https://drive.google.com/file/d/1zXiK0iTVQ2k8hMuRldHXo352PzTKN43o/view?usp=drive_link
 - Executar comando docker-compose up -d
 - Será iniciado 2 containers: 1 com a api via imagem do dockerhub e 1 com o banco mysql.
 
