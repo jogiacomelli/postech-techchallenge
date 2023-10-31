@@ -13,7 +13,7 @@ public class RegisterItemUseCase implements RegisterItemInputPort {
   private final RegisterItemOutputPort registerItemOutputPort;
 
   @Override
-  public void execute(Item item) {
-    registerItemOutputPort.execute(item);
+  public Item execute(Item item) {
+    return registerItemOutputPort.execute(item);
   }
 }

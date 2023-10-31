@@ -18,8 +18,8 @@ public class RegisterItemAdapter implements RegisterItemOutputPort {
 
   @Override
   @Transactional
-  public void execute(Item item) {
+  public Item execute(Item item) {
     var itemEntity = modelMapper.map(item, ItemEntity.class);
-    itemRepository.save(itemEntity);
+    return modelMapper.map(itemRepository.save(itemEntity), Item.class);
   }
 }

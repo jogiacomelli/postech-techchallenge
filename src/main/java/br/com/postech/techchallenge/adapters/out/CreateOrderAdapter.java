@@ -10,6 +10,7 @@ import br.com.postech.techchallenge.application.ports.out.CreateOrderOutputPort;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,10 +19,11 @@ public class CreateOrderAdapter implements CreateOrderOutputPort {
 
   private final OrderRepository orderRepository;
   private final ItemRepository itemRepository;
+  private final ModelMapper modelMapper;
 
   @Override
   @Transactional
-  public void execute(Order order) {
+  public Order execute(Order order) {
 
     var orderEntity = new OrderEntity();
     if (order.isOrderWithIdentification()) {
@@ -29,7 +31,7 @@ public class CreateOrderAdapter implements CreateOrderOutputPort {
     }
 
     order.getOrderItems().forEach(orderItem -> orderEntity.addOrderItem(buildOrderItemEntity(orderItem)));
-    orderRepository.save(orderEntity);
+    return modelMapper.map(orderRepository.save(orderEntity), Order.class);
   }
 
   private OrderItemEntity buildOrderItemEntity(OrderItem orderItem) {

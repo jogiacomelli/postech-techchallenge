@@ -14,9 +14,9 @@ public class CreateOrderUseCase implements CreateOrderInputPort {
   private final CreateOrderOutputPort createOrderOutputPort;
 
   @Override
-  public void execute(Order order) {
+  public Order execute(Order order) {
     try {
-      createOrderOutputPort.execute(order);
+      return createOrderOutputPort.execute(order);
     } catch (IllegalArgumentException e) {
       throw new NotFoundException("Pedido com item não existente, revise o pedido!");
     }

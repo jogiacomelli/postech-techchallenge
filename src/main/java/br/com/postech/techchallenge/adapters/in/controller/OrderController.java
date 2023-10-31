@@ -30,10 +30,10 @@ public class OrderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public void orderCreation(@Valid @RequestBody final OrderCreationRequest orderCreationRequest) {
+  public OrderResponse orderCreation(@Valid @RequestBody final OrderCreationRequest orderCreationRequest) {
     log.info("Order creation request: {} received", orderCreationRequest);
     var order = modelMapper.map(orderCreationRequest, Order.class);
-    createOrderInputPort.execute(order);
+    return modelMapper.map(createOrderInputPort.execute(order), OrderResponse.class);
   }
 
   @GetMapping
