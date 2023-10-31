@@ -14,8 +14,8 @@ public class OrderResponse {
     private String cpf;
     private List<OrderItem> orderItems;
     private OrderStatus status;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime orderDate;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime lastUpdateDate;
 }

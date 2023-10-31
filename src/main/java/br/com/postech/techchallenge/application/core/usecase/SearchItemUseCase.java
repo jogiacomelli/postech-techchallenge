@@ -16,10 +16,9 @@ public class SearchItemUseCase implements SearchItemInputPort {
 
     SearchItemOutputPort searchItemOutputPort;
     @Override
-    public List<Item> execute(@NotNull String type) {
+    public List<Item> execute(@NotNull ItemType type) {
         try {
-            var itemType = ItemType.valueOf(type.toUpperCase());
-            return searchItemOutputPort.execute(itemType);
+            return searchItemOutputPort.execute(type);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid item type.");
         }

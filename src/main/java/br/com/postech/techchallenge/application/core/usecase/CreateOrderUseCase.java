@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class CreateOrderUseCase implements CreateOrderInputPort {
 
   private final CreateOrderOutputPort createOrderOutputPort;
-  private final SearchClientByCpfUseCase searchClientByCpfUseCase;
 
   @Override
   public void execute(Order order) {

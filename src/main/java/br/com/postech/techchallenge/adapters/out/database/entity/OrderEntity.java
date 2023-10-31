@@ -50,7 +50,7 @@ public class OrderEntity {
   @OneToOne(mappedBy = "order")
   private PaymentEntity payment;
 
-  @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
+  @OneToMany(mappedBy = "order", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
   private List<OrderItemEntity> orderItems = new ArrayList<>();
 
   public void addOrderItem(OrderItemEntity orderItem) {
