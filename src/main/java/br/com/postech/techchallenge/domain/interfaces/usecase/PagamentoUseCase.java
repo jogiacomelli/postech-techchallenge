@@ -13,6 +13,5 @@ public interface PagamentoUseCase {
 
     List<PedidoDTO> findPedidosByStatusPagamento(boolean pago);
 
-    String geraQrCodePedido(Long id);
     void gerarCobranca(PedidoDTO pedido, Cliente cliente);
 }
